@@ -2,7 +2,7 @@ package br.univille;
 
 public enum GameConstants {
     
-    BLOCK_SIZE(20),
+    BLOCK_SIZE(10),
     INTERVAL(100),
     SCREEN_WIDTH(1000),
     SCREEN_HEIGHT(550);
