@@ -6,8 +6,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.plaf.DimensionUIResource;
 
 public class GameSettings extends JPanel implements KeyListener {
 
@@ -18,35 +20,41 @@ public class GameSettings extends JPanel implements KeyListener {
     private int posX[] = new int[width.getNum() / blockSize.getNum()];
     private int posY[] = new int[height.getNum() / blockSize.getNum()];
     private int snakeSize = 6;
+    private int foodX;
+    private int foodY;
     private boolean up, down, left, right;
-    private int blockX;
-    private int blockY;
     private Timer time;
     private Random rand = new Random();
 
     public GameSettings() {
 
-        setBackground(Color.LIGHT_GRAY);
+        setPreferredSize(new DimensionUIResource(width.getNum(), height.getNum()));
+        setBackground(Color.BLACK);
         setFocusable(true);
         addKeyListener(this);
-        time = new Timer(interval.getNum(), e -> {walk(); repaint();});
+        foodCoordinates();
+        time = new Timer(interval.getNum(), e -> {
+            catchFood();
+            walk();
+            repaint();});
         time.start();
 
     }
 
     @Override
     public void paintComponent(Graphics g) {
+
         super.paintComponent(g);
         drawSnake(g);
+        drawFood(g);
+
     }
 
     private void drawSnake(Graphics g) {
 
-        drawFood(g);
-
         for (int i = 0; i < snakeSize; i++){
             if (i == 0) {
-                g.setColor(Color.GREEN);
+                g.setColor(Color.RED);
                 g.fillRect(posX[0], posY[0], blockSize.getNum(), blockSize.getNum());
             } else {
                 g.setColor(Color.RED);
@@ -56,8 +64,10 @@ public class GameSettings extends JPanel implements KeyListener {
 
         if (posX[0] < 0 || posX[0] >= width.getNum()) {
             time.stop();
+            gameOver();
         } else if (posY[0] < 0 || posY[0] >= height.getNum()) {
             time.stop();
+            gameOver();
         } /* else {
             for (int i = 0; i < snakeSize; i++) {
                 if (posX[0] == posX[i] && posY[0] == posY[i]) {
@@ -65,6 +75,13 @@ public class GameSettings extends JPanel implements KeyListener {
                 }
             }
         } */
+    }
+
+    private void drawFood(Graphics g) {
+
+        g.setColor(Color.yellow);
+        g.fillOval(foodX, foodY, blockSize.getNum(), blockSize.getNum());
+
     }
 
     private void walk() {
@@ -86,12 +103,31 @@ public class GameSettings extends JPanel implements KeyListener {
 
     }
 
-    private void drawFood(Graphics g) {
-        blockX = rand.nextInt(width.getNum() / blockSize.getNum());
-        blockY = rand.nextInt(height.getNum() / blockSize.getNum());
+    private void foodCoordinates() {
 
-        g.setColor(Color.yellow);
-        g.fillRect(blockX, blockY, blockSize.getNum(), blockSize.getNum());
+        foodX = rand.nextInt(width.getNum() / blockSize.getNum()) * blockSize.getNum();
+        foodY = rand.nextInt(height.getNum() / blockSize.getNum()) * blockSize.getNum();
+
+    }
+
+    private void catchFood() {
+
+        if (posX[0] == foodX && posY[0] == foodY) {
+            foodCoordinates();
+            snakeSize++;
+        }
+
+    }
+
+    private void gameOver() {
+
+        JFrame frame = new JFrame();
+        frame.setSize(500, 275);
+        frame.setTitle("Game-Over");
+        frame.setLocationRelativeTo(null);
+        frame.add(new GameOver());
+        frame.setVisible(true);
+
     }
 
     @Override
