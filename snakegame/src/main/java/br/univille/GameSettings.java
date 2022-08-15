@@ -9,6 +9,7 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.DimensionUIResource;
 
 public class GameSettings extends JPanel implements KeyListener {
@@ -22,6 +23,7 @@ public class GameSettings extends JPanel implements KeyListener {
     private int snakeSize = 6;
     private int foodX;
     private int foodY;
+    private static int score;
     private boolean up, down, left, right;
     private Timer time;
     private Random rand = new Random();
@@ -54,10 +56,10 @@ public class GameSettings extends JPanel implements KeyListener {
 
         for (int i = 0; i < snakeSize; i++){
             if (i == 0) {
-                g.setColor(Color.RED);
+                g.setColor(new ColorUIResource(223, 240, 1));
                 g.fillRect(posX[0], posY[0], blockSize.getNum(), blockSize.getNum());
             } else {
-                g.setColor(Color.RED);
+                g.setColor(Color.GREEN);
                 g.fillRect(posX[i], posY[i], blockSize.getNum(), blockSize.getNum());
             }
         }
@@ -79,7 +81,7 @@ public class GameSettings extends JPanel implements KeyListener {
 
     private void drawFood(Graphics g) {
 
-        g.setColor(Color.yellow);
+        g.setColor(Color.RED);
         g.fillOval(foodX, foodY, blockSize.getNum(), blockSize.getNum());
 
     }
@@ -113,8 +115,9 @@ public class GameSettings extends JPanel implements KeyListener {
     private void catchFood() {
 
         if (posX[0] == foodX && posY[0] == foodY) {
-            foodCoordinates();
             snakeSize++;
+            score++;
+            foodCoordinates();
         }
 
     }
@@ -128,6 +131,10 @@ public class GameSettings extends JPanel implements KeyListener {
         frame.add(new GameOver());
         frame.setVisible(true);
 
+    }
+
+    public static int getScore() {
+        return score;
     }
 
     @Override
