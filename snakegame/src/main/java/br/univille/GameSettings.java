@@ -47,8 +47,8 @@ public class GameSettings extends JPanel implements KeyListener {
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        drawSnake(g);
         drawFood(g);
+        drawSnake(g);
 
     }
 
@@ -64,19 +64,8 @@ public class GameSettings extends JPanel implements KeyListener {
             }
         }
 
-        if (posX[0] < 0 || posX[0] >= width.getNum()) {
-            time.stop();
-            gameOver();
-        } else if (posY[0] < 0 || posY[0] >= height.getNum()) {
-            time.stop();
-            gameOver();
-        } /* else {
-            for (int i = 0; i < snakeSize; i++) {
-                if (posX[0] == posX[i] && posY[0] == posY[i]) {
-                    time.stop();
-                }
-            }
-        } */
+        gameOver();
+        
     }
 
     private void drawFood(Graphics g) {
@@ -123,6 +112,24 @@ public class GameSettings extends JPanel implements KeyListener {
     }
 
     private void gameOver() {
+
+        if (posX[0] < 0 || posX[0] >= width.getNum()) {
+            time.stop();
+            gameOverView();
+        } else if (posY[0] < 0 || posY[0] >= height.getNum()) {
+            time.stop();
+            gameOverView();
+        } /* else {
+            for (int i = 0; i < snakeSize; i++) {
+                if (posX[0] == posX[i] && posY[0] == posY[i]) {
+                    time.stop();
+                }
+            }
+        } */
+
+    }
+
+    private void gameOverView() {
 
         JFrame frame = new JFrame();
         frame.setSize(500, 275);
