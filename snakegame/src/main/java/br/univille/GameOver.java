@@ -28,8 +28,10 @@ public class GameOver extends JPanel{
 
         String gameOver = "Game-Over";
         String points = "Points: " + GameSettings.getScore();
+
         g.setColor(Color.RED);
         g.setFont(new Font("Arial", Font.BOLD, 46));
+        
         FontMetrics metrics = g.getFontMetrics();
         g.drawString(gameOver, (500/2) - (metrics.stringWidth(gameOver)/2), 110);
         g.drawString(points, (500/2) - (metrics.stringWidth(points)/2), 190);

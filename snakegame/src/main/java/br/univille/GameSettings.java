@@ -178,6 +178,7 @@ public class GameSettings extends JPanel implements KeyListener {
                 down = false;
             }
         }
+        
     }
 
     @Override
