@@ -1,6 +1,7 @@
 package br.univille;
 
 import javax.swing.JPanel;
+import javax.swing.plaf.DimensionUIResource;
 
 import java.awt.Graphics;
 import java.awt.Color;
@@ -11,6 +12,7 @@ public class GameOver extends JPanel{
     
     public GameOver() {
 
+        setPreferredSize(new DimensionUIResource(500, 275));
         setBackground(Color.BLACK);
         repaint();
 

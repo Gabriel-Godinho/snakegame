@@ -6,7 +6,7 @@ public class GameScreen extends JFrame{
      
     public GameScreen() {
 
-        setSize(1000, 550);
+        setSize(1016, 550);
         add(new GameSettings(), "Center");
         setTitle("Snake Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

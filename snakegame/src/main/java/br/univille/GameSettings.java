@@ -18,14 +18,14 @@ public class GameSettings extends JPanel implements KeyListener {
     private GameConstants width = GameConstants.SCREEN_WIDTH;
     private GameConstants blockSize = GameConstants.BLOCK_SIZE;
     private GameConstants interval = GameConstants.INTERVAL;
-    private int posX[] = new int[width.getNum() / blockSize.getNum()];
-    private int posY[] = new int[height.getNum() / blockSize.getNum()];
+    private int posX[] = new int[width.getNum() * blockSize.getNum()];
+    private int posY[] = new int[height.getNum() * blockSize.getNum()];
     private int snakeSize = 6;
     private int foodX;
     private int foodY;
     private static int score;
     private boolean up, down, left, right;
-    private Timer time;
+    private Timer timer;
     private Random rand = new Random();
 
     public GameSettings() {
@@ -35,11 +35,11 @@ public class GameSettings extends JPanel implements KeyListener {
         setFocusable(true);
         addKeyListener(this);
         foodCoordinates();
-        time = new Timer(interval.getNum(), e -> {
-            catchFood();
+        timer = new Timer(interval.getNum(), e -> {
             walk();
+            catchFood();
             repaint();});
-        time.start();
+        timer.start();
 
     }
 
@@ -114,10 +114,10 @@ public class GameSettings extends JPanel implements KeyListener {
     private void gameOver() {
 
         if (posX[0] < 0 || posX[0] >= width.getNum()) {
-            time.stop();
+            timer.stop();
             gameOverView();
         } else if (posY[0] < 0 || posY[0] >= height.getNum()) {
-            time.stop();
+            timer.stop();
             gameOverView();
         } /* else {
             for (int i = 0; i < snakeSize; i++) {
