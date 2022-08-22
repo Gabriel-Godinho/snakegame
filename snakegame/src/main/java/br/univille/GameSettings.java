@@ -9,7 +9,6 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.DimensionUIResource;
 
 public class GameSettings extends JPanel implements KeyListener {
@@ -55,13 +54,8 @@ public class GameSettings extends JPanel implements KeyListener {
     private void drawSnake(Graphics g) {
 
         for (int i = 0; i < snakeSize; i++){
-            if (i == 0) {
-                g.setColor(new ColorUIResource(223, 240, 1));
-                g.fillRect(posX[0], posY[0], blockSize.getNum(), blockSize.getNum());
-            } else {
-                g.setColor(Color.GREEN);
-                g.fillRect(posX[i], posY[i], blockSize.getNum(), blockSize.getNum());
-            }
+            g.setColor(Color.GREEN);
+            g.fillRect(posX[i], posY[i], blockSize.getNum(), blockSize.getNum());
         }
 
         gameOver();
@@ -135,7 +129,7 @@ public class GameSettings extends JPanel implements KeyListener {
         frame.setSize(500, 275);
         frame.setTitle("Game-Over");
         frame.setLocationRelativeTo(null);
-        frame.add(new GameOver());
+        frame.add(new GameOver(), "Center");
         frame.setVisible(true);
 
     }

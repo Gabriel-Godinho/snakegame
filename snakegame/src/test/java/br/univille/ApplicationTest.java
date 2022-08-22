@@ -12,6 +12,6 @@ public class ApplicationTest {
   @Test
   @DisplayName("Pointless test")
   void smokeTest() {
-    assertThat(true).isEqualTo(true);
+      assertThat(true).isEqualTo(true);
   }
 }
