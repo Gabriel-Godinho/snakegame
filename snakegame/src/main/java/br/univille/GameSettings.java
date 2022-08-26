@@ -57,8 +57,6 @@ public class GameSettings extends JPanel implements KeyListener {
             g.setColor(Color.GREEN);
             g.fillRect(posX[i], posY[i], blockSize.getNum(), blockSize.getNum());
         }
-
-        gameOver();
         
     }
 
@@ -77,13 +75,17 @@ public class GameSettings extends JPanel implements KeyListener {
         }
 
         if (up) {
-            posY[0] -= blockSize.getNum(); 
+            posY[0] -= blockSize.getNum();
+            gameOver();
         } else if (down) {
             posY[0] += blockSize.getNum();
+            gameOver();
         } else if (left) {
             posX[0] -= blockSize.getNum();
+            gameOver();
         } else if (right) {
             posX[0] += blockSize.getNum();
+            gameOver();
         }
 
     }
@@ -113,13 +115,16 @@ public class GameSettings extends JPanel implements KeyListener {
         } else if (posY[0] < 0 || posY[0] >= height.getNum()) {
             timer.stop();
             gameOverView();
-        } /* else {
-            for (int i = 0; i < snakeSize; i++) {
-                if (posX[0] == posX[i] && posY[0] == posY[i]) {
-                    time.stop();
+        } else {
+            for (int i = 0; i <= snakeSize; i++) {
+                if (i == 0) {
+                    continue;
+                } else if (posX[0] == posX[i] && posY[0] == posY[i]) {
+                    timer.stop();
+                    gameOverView();
                 }
             }
-        } */
+        } 
 
     }
 
