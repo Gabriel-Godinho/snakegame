@@ -88,6 +88,8 @@ public class GameSettings extends JPanel implements KeyListener {
             gameOver();
         }
 
+        reachWall();
+
     }
 
     private void foodCoordinates() {
@@ -97,34 +99,42 @@ public class GameSettings extends JPanel implements KeyListener {
 
     }
 
+    private void reachWall() {
+
+        if (posX[0] < 0) {
+            posX[0] = 1000;
+        } else if (posX[0] > 1000 + 10) {
+            posX[0] = -15;
+        }
+
+        if (posY[0] < 0) {
+            posY[0] = 500;
+        } else if (posY[0] > 500 + 10) {
+            posY[0] = -15;
+        }
+
+    }
+
     private void catchFood() {
 
         if (posX[0] == foodX && posY[0] == foodY) {
+            foodCoordinates();
             snakeSize++;
             score++;
-            foodCoordinates();
         }
 
     }
 
     private void gameOver() {
 
-        if (posX[0] < 0 || posX[0] >= width.getNum()) {
-            timer.stop();
-            gameOverView();
-        } else if (posY[0] < 0 || posY[0] >= height.getNum()) {
-            timer.stop();
-            gameOverView();
-        } else {
-            for (int i = 0; i <= snakeSize; i++) {
-                if (i == 0) {
-                    continue;
-                } else if (posX[0] == posX[i] && posY[0] == posY[i]) {
-                    timer.stop();
-                    gameOverView();
-                }
+        for (int i = 0; i <= snakeSize; i++) {
+            if (i == 0) {
+                continue;
+            } else if (posX[0] == posX[i] && posY[0] == posY[i]) {
+                timer.stop();
+                gameOverView();
             }
-        } 
+        }
 
     }
 
