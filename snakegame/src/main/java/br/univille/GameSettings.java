@@ -35,6 +35,7 @@ public class GameSettings extends JPanel implements KeyListener {
         addKeyListener(this);
         foodCoordinates();
         timer = new Timer(interval.getNum(), e -> {
+            reachWall();
             walk();
             catchFood();
             repaint();});
@@ -63,7 +64,7 @@ public class GameSettings extends JPanel implements KeyListener {
     private void drawFood(Graphics g) {
 
         g.setColor(Color.RED);
-        g.fillOval(foodX, foodY, blockSize.getNum(), blockSize.getNum());
+        g.fillRect(foodX, foodY, blockSize.getNum(), blockSize.getNum());
 
     }
 
@@ -88,8 +89,6 @@ public class GameSettings extends JPanel implements KeyListener {
             gameOver();
         }
 
-        reachWall();
-
     }
 
     private void foodCoordinates() {
@@ -102,13 +101,13 @@ public class GameSettings extends JPanel implements KeyListener {
     private void reachWall() {
 
         if (posX[0] < 0) {
-            posX[0] = 1000;
+            posX[0] = blockSize.getNum() * 67;
         } else if (posX[0] > 1000 + 10) {
             posX[0] = -15;
         }
 
         if (posY[0] < 0) {
-            posY[0] = 500;
+            posY[0] = blockSize.getNum() * 34;
         } else if (posY[0] > 500 + 10) {
             posY[0] = -15;
         }
