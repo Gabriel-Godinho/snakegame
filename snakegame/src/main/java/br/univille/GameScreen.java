@@ -1,5 +1,6 @@
 package br.univille;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class GameScreen extends JFrame{
@@ -11,7 +12,15 @@ public class GameScreen extends JFrame{
         setTitle("Snake Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setIcon();
         setVisible(true);
 
     }
+
+    private void setIcon() {
+
+        setIconImage(new ImageIcon(getClass().getResource("./img/snake.png")).getImage());
+        
+    }
+
 }
