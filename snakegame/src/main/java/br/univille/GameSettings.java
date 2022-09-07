@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -144,6 +145,7 @@ public class GameSettings extends JPanel implements KeyListener {
         frame.setTitle("Game-Over");
         frame.setLocationRelativeTo(null);
         frame.add(new GameOver(), "Center");
+        frame.setIconImage(new ImageIcon(getClass().getResource("./img/dead.png")).getImage());
         frame.setVisible(true);
 
     }
