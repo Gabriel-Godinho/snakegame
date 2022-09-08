@@ -159,28 +159,28 @@ public class GameSettings extends JPanel implements KeyListener {
 
         walk();
         
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
+        if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
             if (!down) {
                 up = true;
                 down = false;
                 right = false;
                 left = false;
             }
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
             if (!up) {
                 down = true;
                 up = false;
                 right = false;
                 left = false;
             }
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
             if (!right) {
                 left = true;
                 right = false;
                 up = false;
                 down = false;
             }
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
             if (!left) {
                 right = true;
                 left = false;
