@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -18,8 +19,8 @@ public class GameSettings extends JPanel implements KeyListener {
     private GameConstants width = GameConstants.SCREEN_WIDTH;
     private GameConstants blockSize = GameConstants.BLOCK_SIZE;
     private GameConstants interval = GameConstants.INTERVAL;
-    private int posX[] = new int[width.getNum() * blockSize.getNum()];
-    private int posY[] = new int[height.getNum() * blockSize.getNum()];
+    private ArrayList<Integer> posX = new ArrayList<>();
+    private ArrayList<Integer> posY = new ArrayList<>();
     private int snakeSize = 6;
     private int foodX;
     private int foodY;
@@ -30,14 +31,19 @@ public class GameSettings extends JPanel implements KeyListener {
 
     public GameSettings() {
 
+        for (int i = 0; i <= snakeSize; i++) {
+            posX.add(0);
+            posY.add(0);
+        }
+
         setPreferredSize(new DimensionUIResource(width.getNum(), height.getNum()));
         setBackground(Color.BLACK);
         setFocusable(true);
         addKeyListener(this);
         foodCoordinates();
         timer = new Timer(interval.getNum(), e -> {
-            reachWall();
             walk();
+            reachWall();
             catchFood();
             repaint();});
         timer.start();
@@ -57,7 +63,7 @@ public class GameSettings extends JPanel implements KeyListener {
 
         for (int i = 0; i < snakeSize; i++){
             g.setColor(Color.GREEN);
-            g.fillRect(posX[i], posY[i], blockSize.getNum(), blockSize.getNum());
+            g.fillRect(posX.get(i), posY.get(i), blockSize.getNum(), blockSize.getNum());
         }
         
     }
@@ -72,21 +78,21 @@ public class GameSettings extends JPanel implements KeyListener {
     private void walk() {
 
         for (int i = snakeSize; i > 0; i--) {
-            posX[i] = posX[i - 1];
-            posY[i] = posY[i - 1];
+            posX.set(i, posX.get(i - 1));
+            posY.set(i, posY.get(i - 1));
         }
 
         if (up) {
-            posY[0] -= blockSize.getNum();
+            posY.set(0, posY.get(0) - blockSize.getNum());
             gameOver();
         } else if (down) {
-            posY[0] += blockSize.getNum();
+            posY.set(0, posY.get(0) + blockSize.getNum());
             gameOver();
         } else if (left) {
-            posX[0] -= blockSize.getNum();
+            posX.set(0, posX.get(0) - blockSize.getNum());
             gameOver();
         } else if (right) {
-            posX[0] += blockSize.getNum();
+            posX.set(0, posX.get(0) + blockSize.getNum());
             gameOver();
         }
 
@@ -101,23 +107,23 @@ public class GameSettings extends JPanel implements KeyListener {
 
     private void reachWall() {
 
-        if (posX[0] < 0) {
-            posX[0] = blockSize.getNum() * 67;
-        } else if (posX[0] > 1000 + 10) {
-            posX[0] = -15;
+        if (posX.get(0) < 0) {
+            posX.set(0, blockSize.getNum() * 67);
+        } else if (posX.get(0) > 1000 + 10) {
+            posX.set(0, -15);
         }
 
-        if (posY[0] < 0) {
-            posY[0] = blockSize.getNum() * 34;
-        } else if (posY[0] > 500 + 10) {
-            posY[0] = -15;
+        if (posY.get(0) < 0) {
+            posY.set(0, blockSize.getNum() * 34);
+        } else if (posY.get(0) > 500 + 10) {
+            posY.set(0, -15);
         }
 
     }
 
     private void catchFood() {
 
-        if (posX[0] == foodX && posY[0] == foodY) {
+        if (posX.get(0) == foodX && posY.get(0) == foodY) {
             foodCoordinates();
             snakeSize++;
             score++;
@@ -130,7 +136,7 @@ public class GameSettings extends JPanel implements KeyListener {
         for (int i = 0; i <= snakeSize; i++) {
             if (i == 0) {
                 continue;
-            } else if (posX[0] == posX[i] && posY[0] == posY[i]) {
+            } else if (posX.get(0) == posX.get(i) && posY.get(0) == posY.get(i)) {
                 timer.stop();
                 gameOverView();
             }
