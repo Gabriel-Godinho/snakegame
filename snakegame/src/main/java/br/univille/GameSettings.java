@@ -42,6 +42,8 @@ public class GameSettings extends JPanel implements KeyListener {
         addKeyListener(this);
         foodCoordinates();
         timer = new Timer(interval.getNum(), e -> {
+            posX.add(0);
+            posY.add(0);
             walk();
             reachWall();
             catchFood();
