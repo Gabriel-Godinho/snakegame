@@ -31,16 +31,12 @@ public class GameSettings extends JPanel implements KeyListener {
 
     public GameSettings() {
 
-        for (int i = 0; i <= snakeSize; i++) {
-            posX.add(0);
-            posY.add(0);
-        }
-
         setPreferredSize(new DimensionUIResource(width.getNum(), height.getNum()));
         setBackground(Color.BLACK);
         setFocusable(true);
         addKeyListener(this);
         foodCoordinates();
+        snakePositionArray();
         timer = new Timer(interval.getNum(), e -> {
             posX.add(0);
             posY.add(0);
@@ -155,6 +151,15 @@ public class GameSettings extends JPanel implements KeyListener {
         frame.add(new GameOver(), "Center");
         frame.setIconImage(new ImageIcon(getClass().getResource("./img/dead.png")).getImage());
         frame.setVisible(true);
+
+    }
+
+    private void snakePositionArray() {
+
+        for (int i = 0; i <= snakeSize; i++) {
+            posX.add(0);
+            posY.add(0);
+        }
 
     }
 
