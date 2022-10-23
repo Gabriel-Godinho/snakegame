@@ -38,8 +38,6 @@ public class GameSettings extends JPanel implements KeyListener {
         foodCoordinates();
         snakePositionArray();
         timer = new Timer(interval.getNum(), e -> {
-            posX.add(0);
-            posY.add(0);
             walk();
             reachWall();
             catchFood();
@@ -123,6 +121,8 @@ public class GameSettings extends JPanel implements KeyListener {
 
         if (posX.get(0) == foodX && posY.get(0) == foodY) {
             foodCoordinates();
+            posX.add(0);
+            posY.add(0);
             snakeSize++;
             score++;
         }
