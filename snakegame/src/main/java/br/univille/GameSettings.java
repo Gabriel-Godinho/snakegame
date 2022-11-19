@@ -131,12 +131,13 @@ public class GameSettings extends JPanel implements KeyListener {
 
     private void gameOver() {
 
-        for (int i = 0; i <= snakeSize; i++) {
-            if (i == 0) {
+        for (int i = 0; i < snakeSize; i++) {
+            if (i == 0)
                 continue;
-            } else if (posX.get(0) == posX.get(i) && posY.get(0) == posY.get(i)) {
+            else if (posX.get(0) == posX.get(i) && posY.get(0) == posY.get(i)) {
                 timer.stop();
                 gameOverView();
+                break;
             }
         }
 
