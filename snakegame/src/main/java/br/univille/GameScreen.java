@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class GameScreen extends JFrame{
-     
+
     public GameScreen() {
 
         setSize(1016, 550);
@@ -19,7 +19,7 @@ public class GameScreen extends JFrame{
 
     private void setIcon() {
 
-        setIconImage(new ImageIcon(getClass().getResource("./img/snake.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("img/snake.png")).getImage());
         
     }
 

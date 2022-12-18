@@ -1,10 +1,11 @@
 package br.univille;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -15,19 +16,19 @@ import javax.swing.plaf.DimensionUIResource;
 
 public class GameSettings extends JPanel implements KeyListener {
 
-    private GameConstants height = GameConstants.SCREEN_HEIGHT;
-    private GameConstants width = GameConstants.SCREEN_WIDTH;
-    private GameConstants blockSize = GameConstants.BLOCK_SIZE;
-    private GameConstants interval = GameConstants.INTERVAL;
-    private ArrayList<Integer> posX = new ArrayList<>();
-    private ArrayList<Integer> posY = new ArrayList<>();
+    private final GameConstants height = GameConstants.SCREEN_HEIGHT;
+    private final GameConstants width = GameConstants.SCREEN_WIDTH;
+    private final GameConstants blockSize = GameConstants.BLOCK_SIZE;
+    private final GameConstants interval = GameConstants.INTERVAL;
+    private final List<Integer> posX = new ArrayList<>();
+    private final List<Integer> posY = new ArrayList<>();
     private int snakeSize = 6;
     private int foodX;
     private int foodY;
     private static int score;
     private boolean up, down, left, right;
-    private Timer timer;
-    private Random rand = new Random();
+    private final Timer timer;
+    private final Random rand = new Random();
 
     public GameSettings() {
 
@@ -37,11 +38,13 @@ public class GameSettings extends JPanel implements KeyListener {
         addKeyListener(this);
         foodCoordinates();
         snakePositionArray();
+
         timer = new Timer(interval.getNum(), e -> {
             walk();
             reachWall();
             catchFood();
             repaint();});
+
         timer.start();
 
     }
@@ -119,7 +122,7 @@ public class GameSettings extends JPanel implements KeyListener {
 
     private void catchFood() {
 
-        if (posX.get(0) == foodX && posY.get(0) == foodY) {
+        if (posX.get(0).equals(foodX) && posY.get(0).equals(foodY)) {
             foodCoordinates();
             posX.add(0);
             posY.add(0);
@@ -131,10 +134,10 @@ public class GameSettings extends JPanel implements KeyListener {
 
     private void gameOver() {
 
-        for (int i = 0; i < snakeSize; i++) {
+        for (int i = 0; i <= snakeSize; i++) {
             if (i == 0)
                 continue;
-            else if (posX.get(0) == posX.get(i) && posY.get(0) == posY.get(i)) {
+            else if (Objects.equals(posX.get(0), posX.get(i)) && Objects.equals(posY.get(0), posY.get(i))) {
                 timer.stop();
                 gameOverView();
                 break;
