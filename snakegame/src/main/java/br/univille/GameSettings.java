@@ -31,7 +31,6 @@ public class GameSettings extends JPanel implements KeyListener {
     private final Random rand = new Random();
 
     public GameSettings() {
-
         setPreferredSize(new DimensionUIResource(width.getNum(), height.getNum()));
         setBackground(Color.BLACK);
         setFocusable(true);
@@ -46,36 +45,28 @@ public class GameSettings extends JPanel implements KeyListener {
             repaint();});
 
         timer.start();
-
     }
 
     @Override
     public void paintComponent(Graphics g) {
-
         super.paintComponent(g);
         drawFood(g);
         drawSnake(g);
-
     }
 
     private void drawSnake(Graphics g) {
-
         for (int i = 0; i < snakeSize; i++){
             g.setColor(Color.GREEN);
             g.fillRect(posX.get(i), posY.get(i), blockSize.getNum(), blockSize.getNum());
         }
-        
     }
 
     private void drawFood(Graphics g) {
-
         g.setColor(Color.RED);
         g.fillRect(foodX, foodY, blockSize.getNum(), blockSize.getNum());
-
     }
 
     private void walk() {
-
         for (int i = snakeSize; i > 0; i--) {
             posX.set(i, posX.get(i - 1));
             posY.set(i, posY.get(i - 1));
@@ -94,18 +85,14 @@ public class GameSettings extends JPanel implements KeyListener {
             posX.set(0, posX.get(0) + blockSize.getNum());
             gameOver();
         }
-
     }
 
     private void foodCoordinates() {
-
         foodX = rand.nextInt(width.getNum() / blockSize.getNum()) * blockSize.getNum();
         foodY = rand.nextInt(height.getNum() / blockSize.getNum()) * blockSize.getNum();
-
     }
 
     private void reachWall() {
-
         if (posX.get(0) < 0) {
             posX.set(0, blockSize.getNum() * 67);
         } else if (posX.get(0) > 1000 + 10) {
@@ -117,11 +104,9 @@ public class GameSettings extends JPanel implements KeyListener {
         } else if (posY.get(0) > 500 + 10) {
             posY.set(0, -15);
         }
-
     }
 
     private void catchFood() {
-
         if (posX.get(0).equals(foodX) && posY.get(0).equals(foodY)) {
             foodCoordinates();
             posX.add(0);
@@ -129,11 +114,9 @@ public class GameSettings extends JPanel implements KeyListener {
             snakeSize++;
             score++;
         }
-
     }
 
     private void gameOver() {
-
         for (int i = 0; i <= snakeSize; i++) {
             if (i == 0)
                 continue;
@@ -143,37 +126,31 @@ public class GameSettings extends JPanel implements KeyListener {
                 break;
             }
         }
-
-    }
-
-    private void gameOverView() {
-
-        JFrame frame = new JFrame();
-        frame.setSize(500, 275);
-        frame.setTitle("Game-Over");
-        frame.setLocationRelativeTo(null);
-        frame.add(new GameOver(), "Center");
-        frame.setIconImage(new ImageIcon(getClass().getResource("./img/dead.png")).getImage());
-        frame.setVisible(true);
-
     }
 
     private void snakePositionArray() {
-
         for (int i = 0; i <= snakeSize; i++) {
             posX.add(0);
             posY.add(0);
         }
-
     }
 
     public static int getScore() {
         return score;
     }
 
+    private void gameOverView() {
+        JFrame frame = new JFrame();
+        frame.setSize(500, 275);
+        frame.setTitle("Game-Over");
+        frame.setLocationRelativeTo(null);
+        frame.add(new GameOver(), "Center");
+        frame.setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("./img/dead.png"))).getImage());
+        frame.setVisible(true);
+    }
+
     @Override
     public void keyPressed(KeyEvent e) {
-
         walk();
         
         if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
@@ -205,7 +182,6 @@ public class GameSettings extends JPanel implements KeyListener {
                 down = false;
             }
         }
-        
     }
 
     @Override
