@@ -16,10 +16,10 @@ import javax.swing.plaf.DimensionUIResource;
 
 public class GameSettings extends JPanel implements KeyListener {
 
-    private final GameConstants height = GameConstants.SCREEN_HEIGHT;
-    private final GameConstants width = GameConstants.SCREEN_WIDTH;
-    private final GameConstants blockSize = GameConstants.BLOCK_SIZE;
-    private final GameConstants interval = GameConstants.INTERVAL;
+    private GameConstants height = GameConstants.SCREEN_HEIGHT;
+    private GameConstants width = GameConstants.SCREEN_WIDTH;
+    private GameConstants blockSize = GameConstants.BLOCK_SIZE;
+    private GameConstants interval = GameConstants.INTERVAL;
     private final List<Integer> posX = new ArrayList<>();
     private final List<Integer> posY = new ArrayList<>();
     private int snakeSize = 6;

@@ -17,7 +17,7 @@ public class ApplicationTest {
   }
 
   @Test
-  @DisplayName("Points")
+  @DisplayName("Score")
   void pointsTest() {
       assertEquals(true, GameSettings.getScore() == 0);
   }
